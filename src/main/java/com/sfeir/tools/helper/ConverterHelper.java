@@ -1,4 +1,4 @@
-package com.sfeir.resource.helper;
+package com.sfeir.tools.helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtilsBean2;
 
 import com.sfeir.domain.Attender;
-import com.sfeir.resource.business.AttenderVO;
+import com.sfeir.tools.business.AttenderVO;
 
 public class ConverterHelper {
 

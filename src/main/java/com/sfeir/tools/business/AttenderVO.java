@@ -1,4 +1,4 @@
-package com.sfeir.resource.business;
+package com.sfeir.tools.business;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

@@ -1,8 +1,11 @@
 package com.sfeir.resource;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBElement;
@@ -12,8 +15,8 @@ import com.google.inject.Injector;
 import com.sfeir.AppModule;
 import com.sfeir.domain.AppDao;
 import com.sfeir.domain.Attender;
-import com.sfeir.resource.business.AttenderVO;
-import com.sfeir.resource.helper.ConverterHelper;
+import com.sfeir.tools.business.AttenderVO;
+import com.sfeir.tools.helper.ConverterHelper;
 
 @Path("/attender")
 public class AttenderResource {
@@ -31,6 +34,13 @@ public class AttenderResource {
         } else {
             return Response.serverError().build();
         }
+    }
+
+    @GET
+    @Path("/hello")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String sayHello(@PathParam("name") String name) {
+        return "Hello " + name;
     }
 
 }
