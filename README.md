@@ -1,1 +1,1 @@
-#Sfeir BOF Conference Organizer
+#Welcome to SFEIR Wizards Organizer
