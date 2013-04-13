@@ -38,5 +38,5 @@ wizardApp.controller('LoginCtrl',function($scope, $http) {
 
 //
 wizardApp.controller('WizardCtrl', function($scope){
-    $scope.homeMessage = "Welcome To Sfeir Wizards"
+    $scope.welcomeUser = "Welcome To Sfeir Wizards"
 })
