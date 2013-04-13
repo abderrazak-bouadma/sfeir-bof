@@ -18,7 +18,7 @@ import com.sfeir.domain.Attender;
 import com.sfeir.tools.business.AttenderVO;
 import com.sfeir.tools.helper.ConverterHelper;
 
-@Path("/attender")
+@Path("/attenders")
 public class AttenderResource {
 
     private Injector injector = Guice.createInjector(new AppModule());
@@ -27,8 +27,7 @@ public class AttenderResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(JAXBElement<AttenderVO> attender) {
         AppDao appDao = injector.getInstance(AppDao.class);
-        Attender entity = appDao.save(ConverterHelper.toAttender(attender
-                .getValue()));
+        Attender entity = appDao.save(ConverterHelper.toAttender(attender.getValue()));
         if (entity != null) {
             return Response.ok(ConverterHelper.toAttenderVo(entity)).build();
         } else {
@@ -37,7 +36,7 @@ public class AttenderResource {
     }
 
     @GET
-    @Path("/hello")
+    @Path("/hello/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public String sayHello(@PathParam("name") String name) {
         return "Hello " + name;
