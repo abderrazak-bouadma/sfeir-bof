@@ -9,7 +9,8 @@ var wizardApp = angular.module('wizardApp',['ngCookies']);
 
 //
 // routers
-wizardApp.config(function($routeProvider){
+wizardApp.config(function($routeProvider,$locationProvider){
+    //
     $routeProvider
         .when('/',
         {
@@ -25,54 +26,50 @@ wizardApp.config(function($routeProvider){
             templateUrl:"Ooops !"
 
         })
+    //
+    //$locationProvider.html5Mode(true).hashPrefix('!')
 })
 
 
 //
 // controllers
-wizardApp.controller('LoginCtrl',function($scope, $http, $cookieStore) {
+wizardApp.controller('LoginCtrl',function($scope, $http, $location,$cookies) {
     $scope.login = function(user) {
-
-        var who;
-        console.log('Is there an authenticated user ? ' + $cookieStore.get('currentUser')==null?'No user connected':'current user is ' + $cookieStore.get('currentUser').email)
-        console.log('trying to authenticate ' + user.email + ' ...')
-
-        if ($cookieStore.get('currentUser')!=null) {
-            who = $cookieStore.get('currentUser')
-        } else {
-            who  =user
-        }
-
-        if (authenticate($http,who)) {
-            alert('Welcome ' + who.email)
-        } else {
-            alert('Authentication failed !')
-        }
+        $http.get('/json/users.json').success(function(data) {
+            var authenticatedUser;
+            for(var i=0; i<data.users.length; i++) {
+                if (user.email == data.users[i].email && user.password == data.users[i].password) {
+                    authenticatedUser = data.users[i]
+                    break
+                }
+            }
+            if (authenticatedUser != null) {
+                console.log('User ' + authenticatedUser.email + ' has been authenticated')
+                $location.path('/wizard')
+                $cookies.username = authenticatedUser.username
+            } else {
+                console.log('Authentication failed !')
+            }
+        })
     }
 })
 
+
 //
-var authenticate = function($http, user) {
-    $http.get('/json/users.json').success(function(data) {
-        var authenticatedUser;
-        for(var i=0; i<data.users.length; i++) {
-            if (user.email == data.users[i].email && user.password == data.users[i].password) {
-                authenticatedUser = data.users[i]
-                break
-            }
-        }
-        if (authenticatedUser != null) {
-            console.log('User ' + authenticatedUser.email + ' has been authenticated')
-            return true
-        } else {
-            console.log('Authentication failed !')
-            return false
-        }
+wizardApp.controller('WizardCtrl', function($scope,$http,$cookies){
+
+    // ping
+    console.log('In WizardCtrl ...')
+
+    //
+    $scope.currentUsername = $cookies.username
+    $scope.conferences = []
+
+    //
+    $http.get('/json/conferences.json').success(function(data) {
+        console.log('data loaded')
+        $scope.conferences = data
     })
-}
 
 
-//
-wizardApp.controller('WizardCtrl', function($scope){
-    $scope.welcomeUser = "Welcome To Sfeir Wizards"
 })

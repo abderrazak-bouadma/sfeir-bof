@@ -1,4 +1,4 @@
 {"users" : [
-    {"email":"test@sfeir.com","password":"qwerty"},
-    {"email":"john.doe@sfeir.com","password":"qwerty"}
+    {"email":"test@sfeir.com","password":"test","username":"عبدالرزاق"},
+    {"email":"john.doe@sfeir.com","password":"test","username":"test"}
 ]}

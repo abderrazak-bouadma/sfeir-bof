@@ -1,14 +1,18 @@
 <div class="container">
 
-    <!-- Main hero unit for a primary marketing message or call to action -->
     <div class="hero-unit">
-        <h1>{{welcomeUser}}</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-large">Sign up &raquo;</a></p>
+        <h1 ng-cloak="currentUser">Welcome back {{currentUsername}}</h1>
     </div>
 
     <hr>
 
+    <div class="container">
+        <ul class="nav nav-tabs nav-stacked">
+            <li ng-repeat="conference in conferences">{{conference.title}}</li>
+        </ul>
+    </div>
+
+    <hr>
     <footer>
         <p><a href="http://creativecommons.org/licenses/by/3.0/"><img src="https://i.creativecommons.org/l/by/3.0/88x31.png"/></a></p>
     </footer>
