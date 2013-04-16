@@ -118,6 +118,7 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         }
     }
 
+    /*
     function calculateGlobalRank(conference) {
         var tracks = conference.tracks
         var sumTracksRank = 0
@@ -128,7 +129,7 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
     }
 
     $scope.globalRank = calculateGlobalRank($scope.conference)
-
+    */
 
     $scope.logout = function(){
         $location.path('/')
