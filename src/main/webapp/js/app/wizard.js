@@ -14,16 +14,21 @@ wizardApp.config(function($routeProvider,$locationProvider){
     $routeProvider
         .when('/',
         {
-            templateUrl:"partials/login.html",
-            controller:"LoginCtrl"
+            templateUrl:'partials/login.html',
+            controller:'LoginCtrl'
         })
         .when('/wizard',
         {
-            templateUrl:"partials/home.html",
-            controller:"WizardCtrl"
+            templateUrl:'partials/home.html',
+            controller:'WizardCtrl'
+        })
+        .when('/conference/:id',
+        {
+            templateUrl:'partials/conference.html',
+            controller:'ConferenceCtrl'
         })
         .otherwise({
-            templateUrl:"Ooops !"
+            templateUrl:'Ooops !'
 
         })
     //
@@ -56,7 +61,8 @@ wizardApp.controller('LoginCtrl',function($scope, $http, $location,$cookies) {
 
 
 //
-wizardApp.controller('WizardCtrl', function($scope,$http,$cookies){
+wizardApp.controller('WizardCtrl', function($scope,$http,$cookies,$location){
+
 
     // ping
     console.log('In WizardCtrl ...')
@@ -68,8 +74,63 @@ wizardApp.controller('WizardCtrl', function($scope,$http,$cookies){
     //
     $http.get('/json/conferences.json').success(function(data) {
         console.log('data loaded')
-        $scope.conferences = data
+        $scope.conferences = data.conferences
     })
 
 
+    $scope.expand = function(key) {
+        $location.path('/conference/'+key)
+    }
+
+    $scope.logout = function(){
+        $location.path('/')
+    }
 })
+
+wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routeParams,$location){
+    $scope.currentUsername = $cookies.username
+    $http.get('/json/conferences.json').success(function(data) {
+        for(var i=0; i<data.conferences.length; i++) {
+            if (data.conferences[i].key == $routeParams.id) {
+                $scope.conference = data.conferences[i]
+                break
+            }
+        }
+    })
+
+    $scope.voteUp = function(trackKey) {
+        var tracks = $scope.conference.tracks
+        for(var i=0; i<tracks.length; i++) {
+            if (tracks[i].key == trackKey && tracks[i].rank<=9) {
+                tracks[i].rank++
+                break
+            }
+        }
+    }
+
+    $scope.voteDown = function(trackKey) {
+        var tracks = $scope.conference.tracks
+        for(var i=0; i<tracks.length; i++) {
+            if (tracks[i].key == trackKey && tracks[i].rank>0) {
+                tracks[i].rank--
+                break
+            }
+        }
+    }
+
+    function calculateGlobalRank(conference) {
+        var tracks = conference.tracks
+        var sumTracksRank = 0
+        for(var i=0; i<tracks.length; i++) {
+            sumTracksRank +=  tracks[i].rank
+        }
+        return sumTracksRank / tracks.length
+    }
+
+    $scope.globalRank = calculateGlobalRank($scope.conference)
+
+
+    $scope.logout = function(){
+        $location.path('/')
+    }
+ })

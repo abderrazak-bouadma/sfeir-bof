@@ -1,15 +1,27 @@
 <div class="container">
 
-    <div class="hero-unit">
-        <h1 ng-cloak="currentUser">Welcome back {{currentUsername}}</h1>
-    </div>
-
-    <hr>
+    <em class="pull-right">You're connected as {{currentUsername}} <button class="btn btn-small" ng-click="logout()">logout</button></em>
 
     <div class="container">
-        <ul class="nav nav-tabs nav-stacked">
-            <li ng-repeat="conference in conferences">{{conference.title}}</li>
-        </ul>
+        <h3>Scheduled Sfeir Conferences</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Number of tracks</th>
+                    <th>Number of attenders</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="conference in conferences">
+                <td><a class="navbar-link" style="cursor: pointer" ng-click="expand(conference.key)">{{conference.title}}</a></td>
+                <td>{{conference.date}}</td>
+                <td>{{conference.tracks.length}}</td>
+                <td>{{conference.attenders.length}}</td>
+                <td><span class="badge badge-warning">{{conference.rank}}</span></td>
+            </tr>
+        </table>
     </div>
 
     <hr>

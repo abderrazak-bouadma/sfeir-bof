@@ -1,9 +1,40 @@
 {"conferences" : [
     {
+        "key" : "0",
+
         "title":"SFEIR Wizards",
 
-        "date":"04/19/2013"
+        "date":"04/19/2013",
 
+        "rank":"5",
 
+        "tracks" : [
+        {"key":"0", "title":"Javascript Testing Is Awesome","timeSlot":"45min","speaker":"abo@sfeir.com","rank":"5","resources":[
+            {"name":"gitHub","value":""},
+            {"name":"SlidShare","value":""}
+        ]},
+        {"key":"1", "title":"Présentation du Leap motion","timeSlot":"45min","speaker":"francois@sfeir.com","rank":"5","resources":[
+            {"name":"gitHub","value":""},
+            {"name":"SlidShare","value":""}
+        ]},
+        {"key":"2", "title":"AngularJS - Advanced Feature","timeSlot":"45min","speaker":"thierry@sfeir.com","rank":"5","resources":[
+            {"name":"gitHub","value":""},
+            {"name":"SlidShare","value":""}
+        ]}      ,
+        {"key":"3", "title":"A la découverte de Drools","timeSlot":"45min","speaker":"francois@sfeir.com","rank":"5","resources":[
+            {"name":"gitHub","value":""},
+            {"name":"SlidShare","value":""}
+        ]}],
+
+        "attenders" : [
+            {"fullname":"Frédéric Dedenis"},
+            {"fullname":"Nicolas François"},
+            {"fullname":"Abderrazak Bouadma"},
+            {"fullname":"Thierry Lau"},
+            {"fullname":"Seifeddine Mansri"},
+            {"fullname":"François Laroche"},
+            {"fullname":"Francois Wauquier"},
+            {"fullname":"Georges ACAR"},
+            {"fullname":"Khaled AOUINI"}]
     }
 ]}

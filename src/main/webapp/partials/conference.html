@@ -1,0 +1,71 @@
+<div class="container">
+
+    <em class="pull-right">You're connected as {{currentUsername}} <button class="btn btn-small" ng-click="logout()">logout</button></em>
+
+    <div class="container">
+        <h3>Conference {{conference.title}} Page <span class="badge badge-important">{{globalRank}}</span></h3>
+        <em>Occuring {{conference.date}} at SFEIR Head office</em>
+        <p></p>
+
+        <!-- tracks-->
+        <h4>Tracks</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Track name</th>
+                    <th>Time slot</th>
+                    <th>Speaker</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="track in conference.tracks">
+                    <td></td>
+                    <td>{{track.title}}</td>
+                    <td>{{track.timeSlot}}</td>
+                    <td>{{track.speaker}}</td>
+                    <td>
+                        <span ng-switch="track.rank">
+                            <span ng-switch-when="track.rank==0">
+                                <span class="badge badge-important">{{track.rank}}</span>
+                            </span>
+                            <span ng-switch-when="track.rank>0 && track.rank<=5">
+                                <span class="badge badge-warning">{{track.rank}}</span>
+                            </span>
+                            <span ng-switch-default>
+                                <span class="badge badge-success">{{track.rank}}</span>
+                            </span>
+                        </span>
+                        <i class="icon-thumbs-up" ng-click="voteUp(track.key)" style="cursor: pointer"></i>
+                        <i class="icon-thumbs-down" ng-click="voteDown(track.key)" style="cursor: pointer"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- attenders-->
+        <h4>Attenders</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>fullname</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="attender in conference.attenders">
+                    <td></td>
+                    <td>{{attender.fullname}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p><a href="http://creativecommons.org/licenses/by/3.0/"><img src="https://i.creativecommons.org/l/by/3.0/88x31.png"/></a></p>
+    </footer>
+
+</div>
