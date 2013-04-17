@@ -8,7 +8,7 @@
         <p></p>
 
         <!-- tracks-->
-        <h4>Tracks</h4>
+        <h4>There are actually {{conference.tracks.length}} submitted Track(s) </h4>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -41,11 +41,27 @@
                         <i class="icon-thumbs-down" ng-click="voteDown(track.key)" style="cursor: pointer"></i>
                     </td>
                 </tr>
+                <div>
+                    <form novalidate class="navbar-form pull-right" name="uForm">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input class="span2" type="text" ng-model="track.title" name="uTrackTitle" placeholder="Track title" /></td>
+                            <td><input class="span2" type="number" ng-model="track.timeSlot" name="uTrackTimeSlot" placeholder="Track timeslot" /></td>
+                            <td><input class="span2" type="email" ng-model="track.speaker" name="uTrackSpeaker" placeholder="speaker email" /></td>
+                            <td>
+                                <select ng-options="user for user in users">
+                                </select>
+                            </td>
+
+                            <td><button type="button" class="btn" ng-click="submitTrack(track)">add</button></td>
+                        </tr>
+                    </form>
+                </div>
             </tbody>
         </table>
 
         <!-- attenders-->
-        <h4>Attenders</h4>
+        <h4>There are {{conference.attenders.length}} registred Attenders</h4>
         <table class="table table-striped">
             <thead>
                 <tr>

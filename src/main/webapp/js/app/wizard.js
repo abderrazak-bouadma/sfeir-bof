@@ -88,7 +88,13 @@ wizardApp.controller('WizardCtrl', function($scope,$http,$cookies,$location){
 })
 
 wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routeParams,$location){
+
     $scope.currentUsername = $cookies.username
+
+    $http.get('/json/users.json').success(function(data) {
+        $scope.users = data
+    })
+
     $http.get('/json/conferences.json').success(function(data) {
         for(var i=0; i<data.conferences.length; i++) {
             if (data.conferences[i].key == $routeParams.id) {
@@ -118,6 +124,16 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         }
     }
 
+    $scope.submitTrack = function submitTrack(track) {
+        var t = new Object()
+        t.key = $scope.conference.tracks
+        t.title = track.title
+        t.timeSlot = track.timeSlot
+        t.speaker = track.speaker
+        t.rank = 0
+        $scope.conference.tracks.push(t)
+        track = null
+    }
     /*
     function calculateGlobalRank(conference) {
         var tracks = conference.tracks
