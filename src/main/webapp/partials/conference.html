@@ -3,12 +3,28 @@
     <em class="pull-right">You're connected as {{currentUsername}} <button class="btn btn-small" ng-click="logout()">logout</button></em>
 
     <div class="container">
-        <h3>Conference {{conference.title}} Page <span class="badge badge-important">{{globalRank}}</span></h3>
+        <h3>Conference {{conference.title}} Page <span class="badge badge-important">{{globalVote}}</span></h3>
         <em>Occuring {{conference.date}} at SFEIR Head office</em>
         <p></p>
 
         <!-- tracks-->
-        <h4>There are actually {{conference.tracks.length}} submitted Track(s) </h4>
+        <h4>There are actually <span id="nbTracks" style="color: darkred; font-size: x-large">{{conference.tracks.length}}</span> submitted Track(s) </h4>
+
+        <ul class="feedbacks">
+            <li ng-repeat="track in conference.tracks" class="feedback">
+                <div class="feedback">
+                    <div class="corpus">
+                        <h3><a class="navbar-link" style="cursor: pointer" ng-click="expand(conference.key)">{{track.title}}</a></h3>
+                        <div style="margin-left: 60px;">{{track.timeSlot}} | <b>{{track.speaker}}</b> |  <b>vote <i class="icon-thumbs-up" ng-click="upvote(track.key)" style="cursor: pointer"></i></b></div>
+                        <div class="user">
+                            {{track.rank}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -16,10 +32,11 @@
                     <th>Track name</th>
                     <th>Time slot</th>
                     <th>Speaker</th>
-                    <th>Rank</th>
+                    <th>#</th>
                 </tr>
             </thead>
             <tbody>
+                <!--
                 <tr ng-repeat="track in conference.tracks">
                     <td></td>
                     <td>{{track.title}}</td>
@@ -41,19 +58,15 @@
                         <i class="icon-thumbs-down" ng-click="voteDown(track.key)" style="cursor: pointer"></i>
                     </td>
                 </tr>
+                -->
                 <div>
                     <form novalidate class="navbar-form pull-right" name="uForm">
                         <tr>
-                            <td>&nbsp;</td>
-                            <td><input class="span2" type="text" ng-model="track.title" name="uTrackTitle" placeholder="Track title" /></td>
-                            <td><input class="span2" type="number" ng-model="track.timeSlot" name="uTrackTimeSlot" placeholder="Track timeslot" /></td>
-                            <td><input class="span2" type="email" ng-model="track.speaker" name="uTrackSpeaker" placeholder="speaker email" /></td>
-                            <td>
-                                <select ng-options="user for user in users">
-                                </select>
-                            </td>
-
-                            <td><button type="button" class="btn" ng-click="submitTrack(track)">add</button></td>
+                            <td></td>
+                            <td><input class="span2" type="text" ng-model="track.title" name="uTrackTitle" placeholder="Track title" required/></td>
+                            <td><input class="span2" type="number" ng-model="track.timeSlot" name="uTrackTimeSlot" placeholder="Track timeslot" required /></td>
+                            <td><input class="span2" type="email" ng-model="track.speaker" name="uTrackSpeaker" placeholder="speaker email" required /></td>
+                            <td><button type="submit" class="btn" ng-click="submitTrack(track)" ng-disabled="uForm.$invalid">add</button></td>
                         </tr>
                     </form>
                 </div>

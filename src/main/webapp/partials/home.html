@@ -4,6 +4,7 @@
 
     <div class="container">
         <h3>Scheduled Sfeir Conferences</h3>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -22,6 +23,22 @@
                 <td><span class="badge badge-warning">{{conference.rank}}</span></td>
             </tr>
         </table>
+
+        <!--
+         <ul class="feedbacks">
+             <li ng-repeat="conference in conferences" class="feedback">
+                 <div class="feedback">
+                    <div class="corpus">
+                        <h3><a class="navbar-link" style="cursor: pointer" ng-click="expand(conference.key)">{{conference.title}}</a></h3>
+                        <div style="margin-left: 60px;">{{conference.date}} | {{conference.tracks.length}} <b>tracks</b> | {{conference.attenders.length}} <b>attenders</b></div>
+                        <div class="user">
+                            {{conference.rank}}
+                        </div>
+                    </div>
+                 </div>
+             </li>
+         </ul>
+        -->
     </div>
 
     <hr>

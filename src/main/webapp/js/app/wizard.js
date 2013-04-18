@@ -75,6 +75,10 @@ wizardApp.controller('WizardCtrl', function($scope,$http,$cookies,$location){
     $http.get('/json/conferences.json').success(function(data) {
         console.log('data loaded')
         $scope.conferences = data.conferences
+        // calculate each conference rank
+        for(var i=0; i<$scope.conferences.length; i++) {
+            $scope.conferences[i].rank = calculateConferenceGlobalRank($scope.conferences[i].tracks)
+        }
     })
 
 
@@ -90,6 +94,7 @@ wizardApp.controller('WizardCtrl', function($scope,$http,$cookies,$location){
 wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routeParams,$location){
 
     $scope.currentUsername = $cookies.username
+    $scope.globalVote = 0
 
     $http.get('/json/users.json').success(function(data) {
         $scope.users = data
@@ -99,12 +104,13 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         for(var i=0; i<data.conferences.length; i++) {
             if (data.conferences[i].key == $routeParams.id) {
                 $scope.conference = data.conferences[i]
+                $scope.globalVote = calculateConferenceGlobalRank($scope.conference.tracks)
                 break
             }
         }
     })
 
-    $scope.voteUp = function(trackKey) {
+    $scope.upvote = function(trackKey) {
         var tracks = $scope.conference.tracks
         for(var i=0; i<tracks.length; i++) {
             if (tracks[i].key == trackKey && tracks[i].rank<=9) {
@@ -112,7 +118,9 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
                 break
             }
         }
+        $scope.globalVote = calculateConferenceGlobalRank(tracks)
     }
+
 
     $scope.voteDown = function(trackKey) {
         var tracks = $scope.conference.tracks
@@ -126,13 +134,16 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
 
     $scope.submitTrack = function submitTrack(track) {
         var t = new Object()
-        t.key = $scope.conference.tracks
+        t.key = $scope.conference.tracks.length
         t.title = track.title
         t.timeSlot = track.timeSlot
         t.speaker = track.speaker
         t.rank = 0
         $scope.conference.tracks.push(t)
-        track = null
+        track.title = null
+        track.timeSlot = null
+        track.speaker = null
+
     }
 
     /*
@@ -152,3 +163,16 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         $location.path('/')
     }
  })
+
+
+var calculateConferenceGlobalRank = function(tracks) {
+    // calculate globalVote
+    var sumTrackVotes = 0
+    if (tracks.length > 0 ) {
+        for(var i=0; i<tracks.length; i++) {
+            sumTrackVotes += tracks[i].rank
+        }
+        return Math.floor( sumTrackVotes / tracks.length)
+    }
+    return sumTrackVotes
+}

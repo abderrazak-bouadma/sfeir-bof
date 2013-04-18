@@ -5,14 +5,61 @@
    ========================================================================== */
 
 
+ul.feedbacks {
 
+}
 
+ul.feedbacks li.feedback {
+    background: #E8E8E8;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding-left: 25px;
+    padding-right: 25px!important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
+ul.feedbacks li.feedback {
+    list-style:none outside;
+}
 
+li.feedback div.feedback {
+    padding-left: 0;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
 
+div.content {
+    margin-top: 0;
+}
 
+div.feedback div.corpus {
+    margin: 0;
+    padding-left: 25px;
+    width: 616px;
+}
 
+div.feedback h3 {
+    margin-left: 60px;
+}
 
+div.corpus div.metadata {
+    margin-left: 50px;
+    position: static;
+    margin-bottom: 10px;
+    height: 15px;
+}
+div.corpus div.user {
+    position: relative;
+    top: -40px;
+    left: 10px;
+    font-size: 45px;
+
+}
 
 
 
