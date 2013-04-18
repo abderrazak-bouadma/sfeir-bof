@@ -133,17 +133,18 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
     }
 
     $scope.submitTrack = function submitTrack(track) {
-        var t = new Object()
-        t.key = $scope.conference.tracks.length
-        t.title = track.title
-        t.timeSlot = track.timeSlot
-        t.speaker = track.speaker
-        t.rank = 0
-        $scope.conference.tracks.push(t)
-        track.title = null
-        track.timeSlot = null
-        track.speaker = null
-
+        if (track!=null && track.title!=null) {
+            var t = new Object()
+            t.key = $scope.conference.tracks.length
+            t.title = track.title
+            t.timeSlot = track.timeSlot
+            t.speaker = track.speaker
+            t.rank = 0
+            $scope.conference.tracks.push(t)
+            track.title = null
+            track.timeSlot = null
+            track.speaker = null
+        }
     }
 
     /*

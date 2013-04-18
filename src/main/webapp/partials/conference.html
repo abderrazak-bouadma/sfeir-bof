@@ -10,6 +10,7 @@
         <!-- tracks-->
         <h4>There are actually <span id="nbTracks" style="color: darkred; font-size: x-large">{{conference.tracks.length}}</span> submitted Track(s) </h4>
 
+        <!--
         <ul class="feedbacks">
             <li ng-repeat="track in conference.tracks" class="feedback">
                 <div class="feedback">
@@ -23,7 +24,7 @@
                 </div>
             </li>
         </ul>
-
+        -->
 
         <table class="table table-striped">
             <thead>
@@ -36,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!--
+
                 <tr ng-repeat="track in conference.tracks">
                     <td></td>
                     <td>{{track.title}}</td>
@@ -54,11 +55,10 @@
                                 <span class="badge badge-success">{{track.rank}}</span>
                             </span>
                         </span>
-                        <i class="icon-thumbs-up" ng-click="voteUp(track.key)" style="cursor: pointer"></i>
-                        <i class="icon-thumbs-down" ng-click="voteDown(track.key)" style="cursor: pointer"></i>
+                        <i class="icon-thumbs-up" ng-click="upvote(track.key)" style="cursor: pointer"></i>
                     </td>
                 </tr>
-                -->
+
                 <div>
                     <form novalidate class="navbar-form pull-right" name="uForm">
                         <tr>
