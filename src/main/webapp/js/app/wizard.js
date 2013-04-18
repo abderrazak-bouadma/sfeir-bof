@@ -134,6 +134,7 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         $scope.conference.tracks.push(t)
         track = null
     }
+    
     /*
     function calculateGlobalRank(conference) {
         var tracks = conference.tracks
