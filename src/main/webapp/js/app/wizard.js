@@ -147,19 +147,6 @@ wizardApp.controller('ConferenceCtrl', function($scope,$http,$cookies,$routePara
         }
     }
 
-    /*
-    function calculateGlobalRank(conference) {
-        var tracks = conference.tracks
-        var sumTracksRank = 0
-        for(var i=0; i<tracks.length; i++) {
-            sumTracksRank +=  tracks[i].rank
-        }
-        return sumTracksRank / tracks.length
-    }
-
-    $scope.globalRank = calculateGlobalRank($scope.conference)
-    */
-
     $scope.logout = function(){
         $location.path('/')
     }
