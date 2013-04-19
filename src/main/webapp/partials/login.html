@@ -10,8 +10,8 @@
 
             <div class="nav-collapse collapse">
                 <form novalidate class="navbar-form pull-right" name="uForm">
-                    <input class="span2" type="email" name="uEmail" placeholder="Email" ng-model="user.email" required>
-                    <input class="span2" type="password" name="uPassword" placeholder="Password" ng-model="user.password" required>
+                    <input class="span2" type="email" id="uEmail" name="uEmail" placeholder="Email" ng-model="user.email" required>
+                    <input class="span2" type="password" id="uPassword" name="uPassword" placeholder="Password" ng-model="user.password" required>
                     <button type="submit" class="btn" ng-click="login(user)" ng-disabled="uForm.$invalid">Sign in</button>
                 </form>
             </div><!--/.nav-collapse -->
