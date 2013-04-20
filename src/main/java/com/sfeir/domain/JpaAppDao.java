@@ -1,5 +1,8 @@
 package com.sfeir.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -16,6 +19,17 @@ public class JpaAppDao implements AppDao {
         tx.commit();
         if (attender.getKey() != null)
             return attender;
+        return null;
+    }
+
+    @Override
+    public List<Attender> all() {
+        return new ArrayList<Attender>();
+    }
+
+    @Override
+    public Attender findByNickname(String nickname) {
+        // TODO Auto-generated method stub
         return null;
     }
 

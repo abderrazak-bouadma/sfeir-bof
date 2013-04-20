@@ -5,11 +5,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.appengine.api.datastore.Key;
 
 @Entity
+@XmlRootElement(name = "Attender")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Attender {
+
+    public Attender() {
+    }
+
+    public Attender(String nickname, String email, String password) {
+        super();
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,10 +32,10 @@ public class Attender {
     private String nickname;
     private String email;
     private String password;
-    
+
     @ManyToOne
     private Talk talk;
-    
+
     @ManyToOne
     private Conference conference;
 
@@ -71,6 +86,5 @@ public class Attender {
     public void setConference(Conference conference) {
         this.conference = conference;
     }
-  
 
 }

@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.GenericEntity;
+
 import org.apache.commons.beanutils.BeanUtilsBean2;
 
 import com.sfeir.domain.Attender;
@@ -42,6 +44,15 @@ public class ConverterHelper {
             e.printStackTrace();
         }
         return vo;
+    }
+
+    public static GenericEntity<List<AttenderVO>> toAttenderVOList(List<Attender> attenders) {
+        List<AttenderVO> result = new ArrayList<>();
+        for (Attender attender : attenders) {
+            result.add(toAttenderVo(attender));
+        }
+        return new GenericEntity<List<AttenderVO>>(result) {
+        };
     }
 
 }
